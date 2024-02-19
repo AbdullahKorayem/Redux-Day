@@ -10,14 +10,13 @@ import { MoviesAction } from "../../Redux/Slices/Movies";
 
 function Movies() {
 
-    
-    
-    const theState = useSelector((state) => state)
-    const FavOfID = theState.Favorite.Favorites.map((fav) => fav.id)
-    const MoviesDispatch = theState.Movies.Movies.results
-    
-    
-    
+
+
+    const theState = useSelector((state) => state);
+    const FavOfID = theState.Favorite.Favorites.map((fav) => fav.id);
+
+    const MoviesDispatch = theState.Movies.Movies;
+
     //------------------------------------- the favorites==-----------------------------
 
     const Dispatch = useDispatch()
@@ -81,14 +80,16 @@ function Movies() {
     useEffect(() => {
 
         Dispatch(MoviesAction())
-
     }, []);
 
     useEffect(() => {
         toGetMovies()
         // toFetchMovies()
-      
-    }, [message]);
+        Dispatch(MoviesAction())
+
+
+
+    }, [MoviesDispatch]);
 
 
 
@@ -119,7 +120,7 @@ function Movies() {
                         </button>
                     </div>
                 </div>
-                {MoviesDispatch.map((item) => (
+                {MoviesDispatch.results.length > 0 ? MoviesDispatch.results.map((item) => (
                     <div
                         key={item.id}
                         className="w-1/4 p-4 my-8 mx-05  transition duration-500 ease-in-out hover:scale-105"
@@ -188,7 +189,7 @@ function Movies() {
                             </div>
                         </div>
                     </div>
-                ))}
+                )) : <h2>there is no Movies to show </h2>}
             </div >
             {/* -------------------- */}
 

@@ -46,11 +46,12 @@ function App() {
     const [language, setLanguage] = useState('en')
 
 
-    return( <LanguageProvider value={{language,setLanguage}}>
+    return(
+        //  <LanguageProvider value={{language,setLanguage}}>
         <Provider store={Store}>
             <RouterProvider router={routes} />
         </Provider>
-    </LanguageProvider>
+    // </LanguageProvider>
     )
 
 }
